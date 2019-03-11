@@ -1,0 +1,25 @@
+[RESOURCES]
+Mesa9
+Mesa8
+Mesa5
+Mesa4
+Mesa7
+Mesa6
+Mesa1
+Mesa3
+Mesa2
+Cozinheiro1
+Atendente1
+Mesa14
+Mesa15
+Mesa10
+Mesa11
+Mesa12
+Mesa13
+Funcionario
+[VARIABLES]
+Cria entidade de controle.NumberOut
+Cliente cansou e vai embora.NumberOut
+Cliente chega no restaurante.NumberOut
+Cliente sai da restaurante.NumberOut
+Controle Vai embora.NumberOut

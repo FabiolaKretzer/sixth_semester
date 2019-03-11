@@ -1,0 +1,36 @@
+\babel@toc {brazil}{}
+\contentsline {chapter}{\numberline {1}Introdu\IeC {\c c}\IeC {\~a}o}{1}
+\contentsline {section}{\numberline {1.1}Objetivos}{1}
+\contentsline {subsection}{\numberline {1.1.1}Objetivos Gerais}{1}
+\contentsline {subsection}{\numberline {1.1.2}Objetivos Espec\IeC {\'\i }ficos}{2}
+\contentsline {section}{\numberline {1.2}Hip\IeC {\'o}teses de Pesquisa}{2}
+\contentsline {section}{\numberline {1.3}Organiza\IeC {\c c}\IeC {\~a}o do Projeto}{2}
+\contentsline {chapter}{\numberline {2}Fundamenta\IeC {\c c}\IeC {\~a}o Te\IeC {\'o}rica}{4}
+\contentsline {section}{\numberline {2.1}Simula\IeC {\c c}\IeC {\~a}o de Sistemas}{4}
+\contentsline {section}{\numberline {2.2}S\IeC {\'\i }ntese Estat\IeC {\'\i }stica}{6}
+\contentsline {subsection}{\numberline {2.2.1}Tamanho da Amostra}{7}
+\contentsline {subsection}{\numberline {2.2.2}Distribui\IeC {\c c}\IeC {\~o}es de Probabilidade e Frequ\IeC {\^e}ncias}{7}
+\contentsline {subsection}{\numberline {2.2.3}Teste do {\relax \fontsize {14.4}{18}\selectfont $\chi $}-Quadrado}{8}
+\contentsline {section}{\numberline {2.3}Infer\IeC {\^e}ncia Estat\IeC {\'\i }stica}{9}
+\contentsline {section}{\numberline {2.4}Projeto de Experimentos}{9}
+\contentsline {chapter}{\numberline {3}Desenvolvimento}{12}
+\contentsline {section}{\numberline {3.1}Especifica\IeC {\c c}\IeC {\~a}o do Problema}{12}
+\contentsline {section}{\numberline {3.2}Planejamento do Projeto}{12}
+\contentsline {subsection}{\numberline {3.2.1}Recursos Humanos}{13}
+\contentsline {subsection}{\numberline {3.2.2}Recursos Tecnol\IeC {\'o}gicos}{13}
+\contentsline {subsection}{\numberline {3.2.3}Cronograma}{13}
+\contentsline {subsection}{\numberline {3.2.4}Cen\IeC {\'a}rios de Simula\IeC {\c c}\IeC {\~a}o}{14}
+\contentsline {section}{\numberline {3.3}Formula\IeC {\c c}\IeC {\~a}o do Modelo Conceitual}{14}
+\contentsline {section}{\numberline {3.4}Coleta de Dados}{16}
+\contentsline {subsection}{\numberline {3.4.1}Tratamento de Dados e Sele\IeC {\c c}\IeC {\~a}o das Distribui\IeC {\c c}\IeC {\~o}es de Probabilidades}{16}
+\contentsline {subsection}{\numberline {3.4.2}Testes de Ader\IeC {\^e}ncia}{17}
+\contentsline {section}{\numberline {3.5}Tradu\IeC {\c c}\IeC {\~a}o do Modelo}{18}
+\contentsline {section}{\numberline {3.6}Verifica\IeC {\c c}\IeC {\~a}o}{21}
+\contentsline {section}{\numberline {3.7}Valida\IeC {\c c}\IeC {\~a}o}{21}
+\contentsline {section}{\numberline {3.8}Projeto Experimental}{21}
+\contentsline {section}{\numberline {3.9}Experimenta\IeC {\c c}\IeC {\~a}o}{21}
+\contentsline {section}{\numberline {3.10}An\IeC {\'a}lise Estat\IeC {\'\i }sticas dos Resultados}{21}
+\contentsline {section}{\numberline {3.11}Apresenta\IeC {\c c}\IeC {\~a}o dos Resultados}{21}
+\contentsline {section}{\numberline {3.12}Identifica\IeC {\c c}\IeC {\~a}o das Melhores Solu\IeC {\c c}\IeC {\~o}es}{21}
+\contentsline {section}{\numberline {3.13}Documenta\IeC {\c c}\IeC {\~a}o}{21}
+\contentsline {chapter}{\numberline {4}Conclus\IeC {\~o}es}{22}

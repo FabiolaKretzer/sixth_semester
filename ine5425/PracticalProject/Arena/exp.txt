@@ -1,0 +1,2 @@
+Atendentes e cozinheiros: min 1 e max 5
+Mesas: min 30 e max 50

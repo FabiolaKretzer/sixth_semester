@@ -1,0 +1,10 @@
+[RESOURCES]
+Cozinheiros
+Atendentes
+Mesas
+[VARIABLES]
+Cria entidade de controle.NumberOut
+Cliente cansou e vai embora.NumberOut
+Cliente chega no restaurante.NumberOut
+Cliente sai da restaurante.NumberOut
+Controle Vai embora.NumberOut

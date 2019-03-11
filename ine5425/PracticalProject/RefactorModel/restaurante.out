@@ -1,0 +1,174 @@
+
+                                      ARENA Simulation Results
+                                    fabiola - License: 1234567890
+
+                                  Sumário para Replicação 1 de 2
+
+Projeto: Unnamed Project                                             Data da execução :11/27/2018
+Analista: LIICT                                                       Data de revisão do modelo:11/27/2018
+
+Replicação terminada no tempo de      : 480.0 Minutos 
+Unidade de Tempo Base: Minutos
+
+                                           VARIÁVEIS DE REGISTRO
+
+Identificador                                  Média   Meia Largura  Mínimo    Máximo   Observações
+___________________________________________________________________________________________________
+
+cliente.VATime                              .00000     (Insuf)    .00000     .00000        199    
+cliente.NVATime                             .00000     (Insuf)    .00000     .00000        199    
+cliente.WaitTime                            22.339     (Insuf)    20.018     32.561        199    
+cliente.TranTime                            .00000     (Insuf)    .00000     .00000        199    
+cliente.OtherTime                           .00000     (Insuf)    .00000     .00000        199    
+cliente.TotalTime                           22.339     (Insuf)    20.018     32.561        199    
+controle.VATime                             .00000     .00000     .00000     .00000        481    
+controle.NVATime                            .00000     .00000     .00000     .00000        481    
+controle.WaitTime                           .00000     .00000     .00000     .00000        481    
+controle.TranTime                           .00000     .00000     .00000     .00000        481    
+controle.OtherTime                          .00000     .00000     .00000     .00000        481    
+controle.TotalTime                          .00000     .00000     .00000     .00000        481    
+Cliente quer um cozinheiro prepare seu ped  24.627     (Insuf)    .00000     53.434         85    
+Cliente quer ser atendido pelo funcionario      --         --         --         --          0
+Cliente quer uma mesa.Queue.WaitingTime     .00000     (Insuf)    .00000     .00000         95    
+Cliente quer ser atendido pelo atendente.Q  22.287     (Insuf)    .00000     32.561        294    
+
+                                     VARIÁVEIS DISCRETAS
+
+Identificador                                 Média   Meia Largura  Mínimo    Máximo   Valor Final
+___________________________________________________________________________________________________
+
+cliente.WIP                                 26.602     (Corr)     .00000     35.000     34.000    
+controle.WIP                                .00000     (Insuf)    .00000     1.0000     .00000    
+Cozinheiros.NumberBusy                      .99240     (Insuf)    .00000     1.0000     1.0000    
+Cozinheiros.NumberScheduled                 1.0000     (Insuf)    1.0000     1.0000     1.0000    
+Cozinheiros.Utilization                     .99240     (Insuf)    .00000     1.0000     1.0000    
+Atendentes.NumberBusy                       1.0000     (Insuf)    .00000     1.0000     1.0000    
+Atendentes.NumberScheduled                  1.0000     (Insuf)    1.0000     1.0000     1.0000    
+Atendentes.Utilization                      1.0000     (Insuf)    .00000     1.0000     1.0000    
+Mesas.NumberBusy                            12.546     (Insuf)    .00000     19.000     18.000    
+Mesas.NumberScheduled                       30.000     (Insuf)    30.000     30.000     30.000    
+Mesas.Utilization                           .41822     (Insuf)    .00000     .63333     .60000    
+Cliente quer um cozinheiro prepare seu ped  4.7630     (Insuf)    .00000     10.000     9.0000    
+Cliente quer ser atendido pelo funcionario  .00000     (Insuf)    .00000     .00000     .00000    
+Cliente quer uma mesa.Queue.NumberInQueue   .00000     (Insuf)    .00000     .00000     .00000    
+Cliente quer ser atendido pelo atendente.Q  14.055     (Corr)     .00000     18.000     16.000    
+
+                                             RESULTADOS
+
+Identificador                                   Valor
+_____________________________________________________________
+
+cliente.NumberIn                            310.00    
+cliente.NumberOut                           276.00    
+controle.NumberIn                           481.00    
+controle.NumberOut                          481.00    
+Cozinheiros.NumberSeized                    85.000    
+Cozinheiros.ScheduledUtilization            .99240    
+Atendentes.NumberSeized                     95.000    
+Atendentes.ScheduledUtilization             1.0000    
+Mesas.NumberSeized                          95.000    
+Mesas.ScheduledUtilization                  .41822    
+System.NumberOut                            680.00    
+
+Iniciando replicação 2 de 2
+
+                                      ARENA Simulation Results
+                                    fabiola - License: 1234567890
+
+                                  Sumário para Replicação 2 de 2
+
+Projeto: Unnamed Project                                             Data da execução :11/27/2018
+Analista: LIICT                                                       Data de revisão do modelo:11/27/2018
+
+Replicação terminada no tempo de      : 480.0 Minutos 
+Unidade de Tempo Base: Minutos
+
+                                           VARIÁVEIS DE REGISTRO
+
+Identificador                                  Média   Meia Largura  Mínimo    Máximo   Observações
+___________________________________________________________________________________________________
+
+cliente.VATime                              .00000     (Insuf)    .00000     .00000        197    
+cliente.NVATime                             .00000     (Insuf)    .00000     .00000        197    
+cliente.WaitTime                            22.211     (Insuf)    20.009     31.000        197    
+cliente.TranTime                            .00000     (Insuf)    .00000     .00000        197    
+cliente.OtherTime                           .00000     (Insuf)    .00000     .00000        197    
+cliente.TotalTime                           22.211     (Insuf)    20.009     31.000        197    
+controle.VATime                             .00000     .00000     .00000     .00000        481    
+controle.NVATime                            .00000     .00000     .00000     .00000        481    
+controle.WaitTime                           .00000     .00000     .00000     .00000        481    
+controle.TranTime                           .00000     .00000     .00000     .00000        481    
+controle.OtherTime                          .00000     .00000     .00000     .00000        481    
+controle.TotalTime                          .00000     .00000     .00000     .00000        481    
+Cliente quer um cozinheiro prepare seu ped  25.671     (Insuf)    .00000     60.701         87    
+Cliente quer ser atendido pelo funcionario      --         --         --         --          0
+Cliente quer uma mesa.Queue.WaitingTime     .00000     (Insuf)    .00000     .00000        100    
+Cliente quer ser atendido pelo atendente.Q  22.268     (Insuf)    .00000     33.425        297    
+
+                                     VARIÁVEIS DISCRETAS
+
+Identificador                                 Média   Meia Largura  Mínimo    Máximo   Valor Final
+___________________________________________________________________________________________________
+
+cliente.WIP                                 27.214     (Corr)     .00000     37.000     31.000    
+controle.WIP                                .00000     (Insuf)    .00000     1.0000     .00000    
+Cozinheiros.NumberBusy                      .98475     (Insuf)    .00000     1.0000     1.0000    
+Cozinheiros.NumberScheduled                 1.0000     (Insuf)    1.0000     1.0000     1.0000    
+Cozinheiros.Utilization                     .98475     (Insuf)    .00000     1.0000     1.0000    
+Atendentes.NumberBusy                       1.0000     (Insuf)    .00000     1.0000     1.0000    
+Atendentes.NumberScheduled                  1.0000     (Insuf)    1.0000     1.0000     1.0000    
+Atendentes.Utilization                      1.0000     (Insuf)    .00000     1.0000     1.0000    
+Mesas.NumberBusy                            13.187     (Insuf)    .00000     22.000     19.000    
+Mesas.NumberScheduled                       30.000     (Insuf)    30.000     30.000     30.000    
+Mesas.Utilization                           .43960     (Insuf)    .00000     .73333     .63333    
+Cliente quer um cozinheiro prepare seu ped  5.4668     (Insuf)    .00000     13.000     12.000    
+Cliente quer ser atendido pelo funcionario  .00000     (Insuf)    .00000     .00000     .00000    
+Cliente quer uma mesa.Queue.NumberInQueue   .00000     (Insuf)    .00000     .00000     .00000    
+Cliente quer ser atendido pelo atendente.Q  14.026     (Corr)     .00000     19.000     12.000    
+
+                                             RESULTADOS
+
+Identificador                                   Valor
+_____________________________________________________________
+
+cliente.NumberIn                            309.00    
+cliente.NumberOut                           278.00    
+controle.NumberIn                           481.00    
+controle.NumberOut                          481.00    
+Cozinheiros.NumberSeized                    87.000    
+Cozinheiros.ScheduledUtilization            .98475    
+Atendentes.NumberSeized                     100.00    
+Atendentes.ScheduledUtilization             1.0000    
+Mesas.NumberSeized                          100.00    
+Mesas.ScheduledUtilization                  .43960    
+System.NumberOut                            678.00    
+
+
+                                      ARENA Simulation Results
+                                    fabiola - License: 1234567890
+
+                               Resumo de resultados para 2 Replicações
+
+Projeto: Unnamed Project                                             Data da execução :11/27/2018
+Analista: LIICT                                                       Data de revisão do modelo:11/27/2018
+
+
+                                             RESULTADOS
+
+Identificador                                 Média    Meia-largura Mínima    Maximo # de Replicações
+___________________________________________________________________________________________________
+
+cliente.NumberIn                            309.50     6.3530     309.00     310.00     2
+cliente.NumberOut                           277.00     12.706     276.00     278.00     2
+controle.NumberIn                           481.00     .00000     481.00     481.00     2
+controle.NumberOut                          481.00     .00000     481.00     481.00     2
+Cozinheiros.NumberSeized                    86.000     12.706     85.000     87.000     2
+Cozinheiros.ScheduledUtilization            .98857     .04855     .98475     .99240     2
+Atendentes.NumberSeized                     97.500     31.765     95.000     100.00     2
+Atendentes.ScheduledUtilization             1.0000     .00000     1.0000     1.0000     2
+Mesas.NumberSeized                          97.500     31.765     95.000     100.00     2
+Mesas.ScheduledUtilization                  .42891     .13581     .41822     .43960     2
+System.NumberOut                            679.00     12.706     678.00     680.00     2
+
+Tempo executando a simulação: 0.02 minutos.
+Simulação completada.

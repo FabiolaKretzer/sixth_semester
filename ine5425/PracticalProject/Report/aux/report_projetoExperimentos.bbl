@@ -1,0 +1,43 @@
+\begin{thebibliography}{}
+
+\bibitem[Automation, 2018]{Arena}
+Automation, R. (2018).
+\newblock Arena tutorial.
+\newblock Acessado em: 2018-09-05.
+
+\bibitem[Barbetta et~al., 2010]{Sturges}
+Barbetta, P.~A., Bornia, A.~C., and Reis, M.~M. (2010).
+\newblock {\em Estatística para Cursos de Engenharia e Informática}.
+\newblock Atlas, 3 edition.
+
+\bibitem[de~Freitas~Filho, 2008]{Freitas}
+de~Freitas~Filho, P.~J. (2008).
+\newblock {\em Introdução à Modelagem e Simulação de Sistemas}.
+\newblock Vidual Books, 2 edition.
+
+\bibitem[Law, 2014]{Distribuicoes}
+Law, A.~M. (2014).
+\newblock {\em Simulation Modeling and Analysis}.
+\newblock McGraw-Hill Education, 5 edition.
+
+\bibitem[Montgomery, 2005]{Montgomery}
+Montgomery, D.~C. (2005).
+\newblock {\em Design and Analysis of Experiments}.
+\newblock John Wiley and Sons, 6 edition.
+
+\bibitem[Pereira and da~Costa, 2012]{Pereira2012}
+Pereira, C.~R. and da~Costa, M. A.~B. (2012).
+\newblock Open access a system simulation model applied to the production
+  schedule of a fish processing facility.
+
+\bibitem[Pocinho, 2009]{Estatistica}
+Pocinho, M. (2009).
+\newblock Estatistica: teoria e exercicios passo a passo. volume i.
+\newblock I:1--82.
+
+\bibitem[Sedgewick and Wayne, 2018]{Princeton}
+Sedgewick, R. and Wayne, K. (2018).
+\newblock Algorithm 4th edition - event driven simulation.
+\newblock Acessado em: 2018-10-02.
+
+\end{thebibliography}
