@@ -1,0 +1,181 @@
+Index: include/synchronizer.h
+===================================================================
+--- include/synchronizer.h	(revision 5029)
++++ include/synchronizer.h	(working copy)
+@@ -11,6 +11,8 @@
+ class Synchronizer_Common
+ {
+ protected:
++    typedef Thread::Synchronized_Queue Queue;
++
+     Synchronizer_Common() {}
+ 
+     // Atomic operations
+@@ -22,9 +24,26 @@
+     void begin_atomic() { Thread::lock(); }
+     void end_atomic() { Thread::unlock(); }
+ 
+-    void sleep() { Thread::yield(); } // implicit unlock()
+-    void wakeup() { end_atomic(); }
+-    void wakeup_all() { end_atomic(); }
++    void sleep()
++    {
++        _blocked.insert(&(Thread::running()->_sync_link));
++        Thread::running()->suspend();
++    }
++
++    void wakeup()
++    {
++        _blocked.remove()->object()->resume();
++    }
++
++    void wakeup_all()
++    {
++        while(!_blocked.empty())
++            wakeup();
++    }
++
++    bool has_any_blocked() { return !_blocked.empty(); }
++
++    Queue _blocked;
+ };
+ 
+ __END_SYS
+Index: include/thread.h
+===================================================================
+--- include/thread.h	(revision 5029)
++++ include/thread.h	(working copy)
+@@ -58,8 +58,9 @@
+         unsigned int stack_size;
+     };
+ 
+-    // Thread Queue
+-    typedef Ordered_Queue<Thread, Priority> Queue;
++    // Thread Priority_Queue
++    typedef Ordered_Queue<Thread, Priority> Priority_Queue;
++    typedef Queue<Thread> Synchronized_Queue;
+ 
+ public:
+     template<typename ... Tn>
+@@ -106,20 +107,21 @@
+     char * _stack;
+     Context * volatile _context;
+     volatile State _state;
+-    Queue::Element _link;
++    Priority_Queue::Element _link;
++    Synchronized_Queue::Element _sync_link;
+ 
+     static Scheduler_Timer * _timer;
+ 
+ private:
+     static Thread * volatile _running;
+-    static Queue _ready;
+-    static Queue _suspended;
++    static Priority_Queue _ready;
++    static Priority_Queue _suspended;
+ };
+ 
+ 
+ template<typename ... Tn>
+ inline Thread::Thread(int (* entry)(Tn ...), Tn ... an)
+-: _state(READY), _link(this, NORMAL)
++: _state(READY), _link(this, NORMAL), _sync_link(this)
+ {
+     constructor_prolog(STACK_SIZE);
+     _context = CPU::init_stack(_stack + STACK_SIZE, &__exit, entry, an ...);
+@@ -128,7 +130,7 @@
+ 
+ template<typename ... Tn>
+ inline Thread::Thread(const Configuration & conf, int (* entry)(Tn ...), Tn ... an)
+-: _state(conf.state), _link(this, conf.priority)
++: _state(conf.state), _link(this, conf.priority), _sync_link(this)
+ {
+     constructor_prolog(conf.stack_size);
+     _context = CPU::init_stack(_stack + conf.stack_size, &__exit, entry, an ...);
+Index: src/abstraction/mutex.cc
+===================================================================
+--- src/abstraction/mutex.cc	(revision 5029)
++++ src/abstraction/mutex.cc	(working copy)
+@@ -21,11 +21,11 @@
+     db<Synchronizer>(TRC) << "Mutex::lock(this=" << this << ")" << endl;
+ 
+     begin_atomic();
++    
+     if(tsl(_locked))
+-        while(tsl(_locked))
+-            sleep(); // implicit end_atomic()
+-    else
+-        end_atomic();
++        sleep();
++    
++    end_atomic();
+ }
+ 
+ 
+@@ -34,8 +34,11 @@
+     db<Synchronizer>(TRC) << "Mutex::unlock(this=" << this << ")" << endl;
+ 
+     begin_atomic();
++
+     _locked = false;
+-    wakeup(); // implicit end_atomic()
++    wakeup_all();
++
++    end_atomic();
+ }
+ 
+ __END_SYS
+Index: src/abstraction/semaphore.cc
+===================================================================
+--- src/abstraction/semaphore.cc	(revision 5029)
++++ src/abstraction/semaphore.cc	(working copy)
+@@ -20,9 +20,15 @@
+ {
+     db<Synchronizer>(TRC) << "Semaphore::p(this=" << this << ",value=" << _value << ")" << endl;
+ 
+-    fdec(_value);
+-    while(_value < 0)
++    begin_atomic();
++
++    if (_value <= 0)
+         sleep();
++    else
++    {
++        fdec(_value);
++        end_atomic();
++    }
+ }
+ 
+ 
+@@ -30,9 +36,14 @@
+ {
+     db<Synchronizer>(TRC) << "Semaphore::v(this=" << this << ",value=" << _value << ")" << endl;
+ 
+-    finc(_value);
+-    if(_value < 1)
++    begin_atomic();
++
++    if(has_any_blocked())
+         wakeup();
++    else
++        finc(_value);
++
++    end_atomic();
+ }
+ 
+ __END_SYS
+Index: src/abstraction/thread.cc
+===================================================================
+--- src/abstraction/thread.cc	(revision 5029)
++++ src/abstraction/thread.cc	(working copy)
+@@ -15,8 +15,8 @@
+ Scheduler_Timer * Thread::_timer;
+ 
+ Thread* volatile Thread::_running;
+-Thread::Queue Thread::_ready;
+-Thread::Queue Thread::_suspended;
++Thread::Priority_Queue Thread::_ready;
++Thread::Priority_Queue Thread::_suspended;
+ 
+ // Methods
+ void Thread::constructor_prolog(unsigned int stack_size)

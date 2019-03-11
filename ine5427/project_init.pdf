@@ -1,0 +1,166 @@
+ï»¿%PDF-1.3
+1 0 obj
+<< /Type /Catalog
+/Outlines 2 0 R
+/Pages 3 0 R >>
+endobj
+2 0 obj
+<< /Type /Outlines /Count 0 >>
+endobj
+3 0 obj
+<< /Type /Pages
+/Kids [6 0 R
+10 0 R
+]
+/Count 2
+/Resources <<
+/ProcSet 4 0 R
+/Font << 
+/F1 8 0 R
+/F2 9 0 R
+>>
+>>
+/MediaBox [0.000 0.000 595.280 841.890]
+ >>
+endobj
+4 0 obj
+[/PDF /Text ]
+endobj
+5 0 obj
+<<
+/Creator (DOMPDF)
+/CreationDate (D:20181004101937-03'00')
+/ModDate (D:20181004101937-03'00')
+/Title (Project Charter)
+>>
+endobj
+6 0 obj
+<< /Type /Page
+/Parent 3 0 R
+/Contents 7 0 R
+>>
+endobj
+7 0 obj
+<<
+/Length 4435 >>
+stream
+
+0.000 0.000 0.000 rg
+BT 248.878 747.449 Td /F2 13.5 Tf  [(Project Charter)] TJ ET
+1.000 1.000 1.000 rg
+BT 360.124 714.276 Td /F1 0.8 Tf  [(Empresa)] TJ ET
+0.753 0.753 0.753 rg
+BT 363.125 714.276 Td /F1 8.2 Tf  [(Empresa)] TJ ET
+BT 396.133 714.276 Td /F1 8.2 Tf  [(: Empresa - Grupo_704)] TJ ET
+BT 419.043 704.622 Td /F1 8.2 Tf  [(Data)] TJ ET
+BT 436.467 704.622 Td /F1 8.2 Tf  [(: 04/10/2018)] TJ ET
+0.000 0.000 0.000 rg
+BT 112.943 658.640 Td /F2 8.2 Tf  [(Título do projeto: )] TJ ET
+BT 112.943 646.888 Td 3.055 Tw /F1 8.2 Tf  [(Desenvolvimento de uma UI para a Formação de Professores do Ensino Básico a Ensinar )] TJ ET
+BT 112.943 635.135 Td 0.000 Tw /F1 8.2 Tf  [(Computação)] TJ ET
+BT 112.943 611.833 Td /F2 8.2 Tf  [(Gerente do projeto:)] TJ ET
+BT 112.943 600.081 Td /F1 8.2 Tf  [(Fabíola Kretzer)] TJ ET
+BT 112.943 576.779 Td /F2 8.2 Tf  [(Justificativa: )] TJ ET
+BT 112.943 565.027 Td 2.559 Tw /F1 8.2 Tf  [(Atualmente a computação está ocupando um papel muito importante em toda a economia e )] TJ ET
+BT 112.943 553.275 Td 1.067 Tw /F1 8.2 Tf  [(sociedade, impulsionando a criação de empregos e a inovação. Muitas vezes a vida de cidadãos )] TJ ET
+BT 112.943 541.523 Td 0.442 Tw /F1 8.2 Tf  [(depende de sistemas computacionais e de pessoas capacitadas em trabalhar com essa tecnologia, )] TJ ET
+BT 112.943 529.771 Td 0.355 Tw /F1 8.2 Tf  [(para assim estar seguros na estrada e no ar. Esses sistemas também estão presentes para auxiliar )] TJ ET
+BT 112.943 518.018 Td 3.804 Tw /F1 8.2 Tf  [(os médicos no diagnóstico e tratamentos de saúde, através de equipamentos e software )] TJ ET
+BT 112.943 506.266 Td 0.712 Tw /F1 8.2 Tf  [(complexos. Estes necessitam de muitos estudos e avanços científicos para não comprometerem a )] TJ ET
+BT 112.943 494.514 Td 0.216 Tw /F1 8.2 Tf  [(vida das pessoas. Por isso, a partir do Ensino Fundamental, a computação precisa ser popularizada )] TJ ET
+BT 112.943 482.762 Td 1.290 Tw /F1 8.2 Tf  [(e as crianças devem ter a oportunidade de: aprender algumas das ideias-chave da computação, )] TJ ET
+BT 112.943 471.010 Td 2.665 Tw /F1 8.2 Tf  [(compreender a lógica e o pensamento computacional e aprender a programar. Para que as )] TJ ET
+BT 112.943 459.258 Td 0.000 Tw /F1 8.2 Tf  [(crianças aprendam programação temos que primeiro ensinar os professores.)] TJ ET
+BT 112.943 435.956 Td /F2 8.2 Tf  [(Objetivos:)] TJ ET
+BT 112.943 424.204 Td 0.864 Tw /F1 8.2 Tf  [(O objetivo geral deste projeto é desenvolver sistematicamente uma unidade instrucional em forma )] TJ ET
+BT 112.943 412.451 Td 0.000 Tw /F1 8.2 Tf  [(de um curso presencial de 40 horas/aula para professores do Ensino Básico.)] TJ ET
+BT 112.943 389.149 Td /F2 8.2 Tf  [(Resultados esperados: )] TJ ET
+BT 112.943 377.397 Td /F1 8.2 Tf  [(Monografia; )] TJ ET
+BT 112.943 365.645 Td /F1 8.2 Tf  [(Plano de ensino; )] TJ ET
+BT 112.943 353.893 Td /F1 8.2 Tf  [(Material de apresentação a ser utilizado durante as aulas; )] TJ ET
+BT 112.943 342.141 Td /F1 8.2 Tf  [(Atividades, exercícios e avaliações; )] TJ ET
+BT 112.943 330.389 Td /F1 8.2 Tf  [(Materiais para os professores poderem aplicar o aprendizado adquirido; )] TJ ET
+BT 112.943 318.637 Td /F1 8.2 Tf  [(Aprovação nas disciplinas de TCC.)] TJ ET
+BT 112.943 295.334 Td /F2 8.2 Tf  [(Premissas: )] TJ ET
+BT 112.943 283.582 Td /F1 8.2 Tf  [(Os professores querem aprender computação; )] TJ ET
+BT 112.943 271.830 Td /F1 8.2 Tf  [(As escolas possuem laboratório de informática.)] TJ ET
+BT 112.943 248.528 Td /F2 8.2 Tf  [(Restrições:)] TJ ET
+BT 112.943 236.776 Td 0.508 Tw /F1 8.2 Tf  [(Os prazos de entregas das disciplinas Introdução ao TCC \(23/11/18\), TCC 1 \(21/06/2019\) e TCC 2 )] TJ ET
+BT 112.943 225.024 Td 0.000 Tw /F1 8.2 Tf  [(\(25/10/2019\) devem ser cumpridas; )] TJ ET
+BT 112.943 213.272 Td /F1 8.2 Tf  [(A monografia deve ser aprovada pela banca avaliadora.)] TJ ET
+BT 112.943 189.970 Td /F2 8.2 Tf  [(Orçamento \(R$\): )] TJ ET
+BT 112.943 178.217 Td /F1 8.2 Tf  [(50.000,00)] TJ ET
+BT 112.943 154.915 Td /F2 8.2 Tf  [(Data de início: )] TJ ET
+BT 112.943 143.163 Td /F1 8.2 Tf  [(23/08/2018)] TJ ET
+BT 112.943 119.861 Td /F2 8.2 Tf  [(Data de encerramento: )] TJ ET
+BT 112.943 108.109 Td /F1 8.2 Tf  [(29/11/2019)] TJ ET
+BT 112.943 84.807 Td /F2 8.2 Tf  [(Marcos: )] TJ ET
+BT 112.943 73.055 Td /F1 8.2 Tf  [(Entrega da proposta do TCC \(23/11/2018\))] TJ ET
+BT 112.943 61.303 Td /F1 8.2 Tf  [(Entrega da primeira versão da monografia do TCC \(21/06/2019\))] TJ ET
+endstream
+endobj
+8 0 obj
+<< /Type /Font
+/Subtype /Type1
+/Name /F1
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+>>
+endobj
+9 0 obj
+<< /Type /Font
+/Subtype /Type1
+/Name /F2
+/BaseFont /Helvetica-Bold
+/Encoding /WinAnsiEncoding
+>>
+endobj
+10 0 obj
+<< /Type /Page
+/Parent 3 0 R
+/Contents 11 0 R
+>>
+endobj
+11 0 obj
+<<
+/Length 838 >>
+stream
+
+0.000 0.000 0.000 rg
+BT 112.943 747.449 Td /F1 8.2 Tf  [(Entrega da versão final da monografia do TCC \(25/10/2019\))] TJ ET
+BT 112.943 712.597 Td /F2 8.2 Tf  [(Critérios de aceite: )] TJ ET
+BT 112.943 700.845 Td /F1 8.2 Tf  [(Aprovação do orientador; )] TJ ET
+BT 112.943 689.093 Td /F1 8.2 Tf  [(Aprovação da banca examinadora; )] TJ ET
+BT 112.943 677.340 Td /F1 8.2 Tf  [(Conformidade com o CEPSH; )] TJ ET
+BT 112.943 665.588 Td /F1 8.2 Tf  [(Conformidade com as normas da UFSC.)] TJ ET
+BT 276.322 630.736 Td /F2 8.2 Tf  [(Signatures)] TJ ET
+0.000 0.000 0.000 RG
+267.148 580.415 m 325.839 580.415 l 325.839 579.665 l 267.148 579.665 l  f
+BT 267.148 572.784 Td /F1 8.2 Tf  [(Project Sponsor)] TJ ET
+263.246 534.013 m 332.034 534.013 l 332.034 533.263 l 263.246 533.263 l  f
+BT 263.246 526.382 Td /F1 8.2 Tf  [(Gerente do projeto)] TJ ET
+endstream
+endobj
+xref
+0 12
+0000000000 65535 f 
+0000000008 00000 n 
+0000000073 00000 n 
+0000000119 00000 n 
+0000000290 00000 n 
+0000000319 00000 n 
+0000000458 00000 n 
+0000000521 00000 n 
+0000005008 00000 n 
+0000005115 00000 n 
+0000005227 00000 n 
+0000005292 00000 n 
+trailer
+<<
+/Size 12
+/Root 1 0 R
+/Info 5 0 R
+>>
+startxref
+6182
+%%E

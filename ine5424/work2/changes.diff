@@ -1,0 +1,362 @@
+Index: app/producer_consumer.cc
+===================================================================
+--- app/producer_consumer.cc	(revision 5029)
++++ app/producer_consumer.cc	(working copy)
+@@ -1 +1,55 @@
+-link ../src/abstraction/synchronizer_test.cc
+\ No newline at end of file
++// EPOS Synchronizer Abstraction Test Program
++
++#include <utility/ostream.h>
++#include <thread.h>
++#include <semaphore.h>
++#include <alarm.h>
++
++using namespace EPOS;
++
++const int iterations = 100;
++
++OStream cout;
++
++const int BUF_SIZE = 16;
++char buffer[BUF_SIZE];
++Semaphore empty(BUF_SIZE);
++Semaphore full(0);
++
++int consumer()
++{
++    int out = 0;
++    for(int i = 0; i < iterations; i++) {
++        full.p();
++        cout << "C<-" << buffer[out] << "\t";
++        out = (out + 1) % BUF_SIZE;
++        Alarm::delay(5000);
++        empty.v();
++    }
++
++    return 0;
++}
++
++int main()
++{
++    Thread * cons = new Thread(&consumer);
++
++    // producer
++    int in = 0;
++    for(int i = 0; i < iterations; i++) {
++        empty.p();
++        Alarm::delay(5000);
++        buffer[in] = 'a' + in;
++        cout << "P->" << buffer[in] << "\t";
++        in = (in + 1) % BUF_SIZE;
++        full.v();
++    }
++
++    cons->join();
++
++    cout << "The end!" << endl;
++
++    delete cons;
++
++    return 0;
++}
+Index: include/synchronizer.h
+===================================================================
+--- include/synchronizer.h	(revision 5029)
++++ include/synchronizer.h	(working copy)
+@@ -11,6 +11,8 @@
+ class Synchronizer_Common
+ {
+ protected:
++    typedef Thread::Synchronized_Queue Queue;
++
+     Synchronizer_Common() {}
+ 
+     // Atomic operations
+@@ -22,9 +24,26 @@
+     void begin_atomic() { Thread::lock(); }
+     void end_atomic() { Thread::unlock(); }
+ 
+-    void sleep() { Thread::yield(); } // implicit unlock()
+-    void wakeup() { end_atomic(); }
+-    void wakeup_all() { end_atomic(); }
++    void sleep()
++    {
++        _blocked.insert(&(Thread::running()->_sync_link));
++        Thread::running()->suspend();
++    }
++
++    void wakeup()
++    {
++        _blocked.remove()->object()->resume();
++    }
++
++    void wakeup_all()
++    {
++        while(!_blocked.empty())
++            wakeup();
++    }
++
++    bool has_any_blocked() { return !_blocked.empty(); }
++
++    Queue _blocked;
+ };
+ 
+ __END_SYS
+Index: include/thread.h
+===================================================================
+--- include/thread.h	(revision 5029)
++++ include/thread.h	(working copy)
+@@ -8,6 +8,8 @@
+ #include <machine.h>
+ #include <system/kmalloc.h>
+ 
++#include <utility/ostream.h>
++
+ extern "C" { void __exit(); }
+ 
+ __BEGIN_SYS
+@@ -58,8 +60,9 @@
+         unsigned int stack_size;
+     };
+ 
+-    // Thread Queue
+-    typedef Ordered_Queue<Thread, Priority> Queue;
++    // Thread Priority_Queue
++    typedef Ordered_Queue<Thread, Priority> Priority_Queue;
++    typedef Queue<Thread> Synchronized_Queue;
+ 
+ public:
+     template<typename ... Tn>
+@@ -101,25 +104,28 @@
+ 
+ private:
+     static void init();
++    void freedom();
+ 
+ protected:
+     char * _stack;
+     Context * volatile _context;
+     volatile State _state;
+-    Queue::Element _link;
++    Priority_Queue::Element _link;
++    Synchronized_Queue::Element _sync_link;
+ 
+     static Scheduler_Timer * _timer;
+ 
+ private:
+     static Thread * volatile _running;
+-    static Queue _ready;
+-    static Queue _suspended;
++    static Priority_Queue    _ready;
++    static Priority_Queue    _suspended;
++    Synchronized_Queue       _waiting_exit;
+ };
+ 
+ 
+ template<typename ... Tn>
+ inline Thread::Thread(int (* entry)(Tn ...), Tn ... an)
+-: _state(READY), _link(this, NORMAL)
++: _state(READY), _link(this, NORMAL), _sync_link(this)
+ {
+     constructor_prolog(STACK_SIZE);
+     _context = CPU::init_stack(_stack + STACK_SIZE, &__exit, entry, an ...);
+@@ -128,7 +134,7 @@
+ 
+ template<typename ... Tn>
+ inline Thread::Thread(const Configuration & conf, int (* entry)(Tn ...), Tn ... an)
+-: _state(conf.state), _link(this, conf.priority)
++: _state(conf.state), _link(this, conf.priority), _sync_link(this)
+ {
+     constructor_prolog(conf.stack_size);
+     _context = CPU::init_stack(_stack + conf.stack_size, &__exit, entry, an ...);
+Index: src/abstraction/mutex.cc
+===================================================================
+--- src/abstraction/mutex.cc	(revision 5029)
++++ src/abstraction/mutex.cc	(working copy)
+@@ -21,11 +21,11 @@
+     db<Synchronizer>(TRC) << "Mutex::lock(this=" << this << ")" << endl;
+ 
+     begin_atomic();
++    
+     if(tsl(_locked))
+-        while(tsl(_locked))
+-            sleep(); // implicit end_atomic()
+-    else
+-        end_atomic();
++        sleep();
++    
++    end_atomic();
+ }
+ 
+ 
+@@ -34,8 +34,11 @@
+     db<Synchronizer>(TRC) << "Mutex::unlock(this=" << this << ")" << endl;
+ 
+     begin_atomic();
++
+     _locked = false;
+-    wakeup(); // implicit end_atomic()
++    wakeup_all();
++
++    end_atomic();
+ }
+ 
+ __END_SYS
+Index: src/abstraction/semaphore.cc
+===================================================================
+--- src/abstraction/semaphore.cc	(revision 5029)
++++ src/abstraction/semaphore.cc	(working copy)
+@@ -20,9 +20,15 @@
+ {
+     db<Synchronizer>(TRC) << "Semaphore::p(this=" << this << ",value=" << _value << ")" << endl;
+ 
+-    fdec(_value);
+-    while(_value < 0)
++    begin_atomic();
++
++    if (_value <= 0)
+         sleep();
++    else
++    {
++        fdec(_value);
++        end_atomic();
++    }
+ }
+ 
+ 
+@@ -30,9 +36,14 @@
+ {
+     db<Synchronizer>(TRC) << "Semaphore::v(this=" << this << ",value=" << _value << ")" << endl;
+ 
+-    finc(_value);
+-    if(_value < 1)
++    begin_atomic();
++
++    if(has_any_blocked())
+         wakeup();
++    else
++        finc(_value);
++
++    end_atomic();
+ }
+ 
+ __END_SYS
+Index: src/abstraction/thread.cc
+===================================================================
+--- src/abstraction/thread.cc	(revision 5029)
++++ src/abstraction/thread.cc	(working copy)
+@@ -15,8 +15,8 @@
+ Scheduler_Timer * Thread::_timer;
+ 
+ Thread* volatile Thread::_running;
+-Thread::Queue Thread::_ready;
+-Thread::Queue Thread::_suspended;
++Thread::Priority_Queue Thread::_ready;
++Thread::Priority_Queue Thread::_suspended;
+ 
+ // Methods
+ void Thread::constructor_prolog(unsigned int stack_size)
+@@ -61,12 +61,14 @@
+     _ready.remove(this);
+     _suspended.remove(this);
+ 
++    if (_state != FINISHING)
++        freedom();
++
+     unlock();
+ 
+     kfree(_stack);
+ }
+ 
+-
+ int Thread::join()
+ {
+     lock();
+@@ -73,8 +75,11 @@
+ 
+     db<Thread>(TRC) << "Thread::join(this=" << this << ",state=" << _state << ")" << endl;
+ 
+-    while(_state != FINISHING)
+-        yield(); // implicit unlock()
++    if(_state != FINISHING)
++    {
++        _waiting_exit.insert(&(Thread::running()->_sync_link));
++        _running->suspend();
++    }
+ 
+     unlock();
+ 
+@@ -162,7 +167,6 @@
+     unlock();
+ }
+ 
+-
+ void Thread::exit(int status)
+ {
+     lock();
+@@ -169,35 +173,52 @@
+ 
+     db<Thread>(TRC) << "Thread::exit(status=" << status << ") [running=" << running() << "]" << endl;
+ 
+-    while(_ready.empty() && !_suspended.empty())
+-        idle(); // implicit unlock();
++    _running->freedom();
+ 
++    while (_ready.empty() && !_suspended.empty())
++        idle();
++
+     lock();
+ 
+-    if(!_ready.empty()) {
++    if(!_ready.empty())
++    {
+         Thread * prev = _running;
+         prev->_state = FINISHING;
+         *reinterpret_cast<int *>(prev->_stack) = status;
+-
++        
+         _running = _ready.remove()->object();
+         _running->_state = RUNNING;
+ 
+         dispatch(prev, _running);
+-    } else {
++    }
++    else if (reboot)
++    {
+         db<Thread>(WRN) << "The last thread in the system has exited!" << endl;
+-        if(reboot) {
+-            db<Thread>(WRN) << "Rebooting the machine ..." << endl;
+-            Machine::reboot();
+-        } else {
+-            db<Thread>(WRN) << "Halting the CPU ..." << endl;
+-            CPU::halt();
+-        }
++        db<Thread>(WRN) << "Rebooting the machine ..." << endl;
++        Machine::reboot();
+     }
++    else
++    {
++        db<Thread>(WRN) << "The last thread in the system has exited!" << endl;
++        db<Thread>(INF) << "Halting the CPU ..." << endl;
++        CPU::halt();
++    }
+ 
+     unlock();
+ }
+ 
++void Thread::freedom()
++{
++    while (!_running->_waiting_exit.empty())
++    {
++        auto link = _running->_waiting_exit.remove();
+ 
++        if (link != 0)
++            link->object()->resume();
++    }
++}
++
++
+ void Thread::reschedule()
+ {
+     yield();

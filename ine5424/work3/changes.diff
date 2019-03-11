@@ -1,0 +1,202 @@
+Index: include/thread.h
+===================================================================
+--- include/thread.h	(revision 5035)
++++ include/thread.h	(working copy)
+@@ -45,7 +45,8 @@
+     enum {
+         HIGH = 0,
+         NORMAL = 15,
+-        LOW = 31
++        LOW = 31,
++        VERYLOW = 47
+     };
+ 
+     // Thread Configuration
+@@ -101,10 +102,9 @@
+ 
+     static void dispatch(Thread * prev, Thread * next);
+ 
+-    static int idle();
+-
+ private:
+     static void init();
++    static int idle();
+ 
+ protected:
+     char * _stack;
+@@ -117,6 +117,7 @@
+     static Scheduler_Timer * _timer;
+ 
+ private:
++    static unsigned int volatile _threads_amount;
+     static Thread * volatile _running;
+     static Queue _ready;
+     static Queue _suspended;
+@@ -127,6 +128,10 @@
+ inline Thread::Thread(int (* entry)(Tn ...), Tn ... an)
+ : _state(READY), _waiting(0), _joining(0), _link(this, NORMAL)
+ {
++    lock();
++    _threads_amount++;
++    unlock();
++
+     constructor_prolog(STACK_SIZE);
+     _context = CPU::init_stack(_stack + STACK_SIZE, &__exit, entry, an ...);
+     constructor_epilog(entry, STACK_SIZE);
+@@ -136,6 +141,10 @@
+ inline Thread::Thread(const Configuration & conf, int (* entry)(Tn ...), Tn ... an)
+ : _state(conf.state), _waiting(0), _joining(0), _link(this, conf.priority)
+ {
++    lock();
++    _threads_amount++;
++    unlock();
++
+     constructor_prolog(conf.stack_size);
+     _context = CPU::init_stack(_stack + conf.stack_size, &__exit, entry, an ...);
+     constructor_epilog(entry, conf.stack_size);
+Index: src/abstraction/thread.cc
+===================================================================
+--- src/abstraction/thread.cc	(revision 5035)
++++ src/abstraction/thread.cc	(working copy)
+@@ -18,6 +18,8 @@
+ Thread::Queue Thread::_ready;
+ Thread::Queue Thread::_suspended;
+ 
++unsigned int volatile Thread::_threads_amount = 0;
++
+ // Methods
+ void Thread::constructor_prolog(unsigned int stack_size)
+ {
+@@ -128,9 +130,6 @@
+     _suspended.insert(&_link);
+ 
+     if(_running == this) {
+-        while(_ready.empty())
+-            idle();
+-
+         _running = _ready.remove()->object();
+         _running->_state = RUNNING;
+ 
+@@ -162,17 +161,14 @@
+ 
+     db<Thread>(TRC) << "Thread::yield(running=" << _running << ")" << endl;
+ 
+-    if(!_ready.empty()) {
+-        Thread * prev = _running;
+-        prev->_state = READY;
+-        _ready.insert(&prev->_link);
++    Thread * prev = _running;
++    prev->_state = READY;
++    _ready.insert(&prev->_link);
+ 
+-        _running = _ready.remove()->object();
+-        _running->_state = RUNNING;
++    _running = _ready.remove()->object();
++    _running->_state = RUNNING;
+ 
+-        dispatch(prev, _running);
+-    } else
+-        idle();
++    dispatch(prev, _running);
+ 
+     unlock();
+ }
+@@ -195,28 +191,13 @@
+ 
+     lock();
+ 
+-    if(_ready.empty()) {
+-        if(!_suspended.empty()) {
+-            while(_ready.empty())
+-                idle(); // implicit unlock();
+-            lock();
+-        } else { // _ready.empty() && _suspended.empty()
+-            db<Thread>(WRN) << "The last thread in the system has exited!\n";
+-            if(reboot) {
+-                db<Thread>(WRN) << "Rebooting the machine ...\n";
+-                Machine::reboot();
+-            } else {
+-                db<Thread>(WRN) << "Halting the CPU ...\n";
+-                CPU::halt();
+-            }
+-        }
+-    } else {
+-        _running = _ready.remove()->object();
+-        _running->_state = RUNNING;
++    _running = _ready.remove()->object();
++    _running->_state = RUNNING;
+ 
+-        dispatch(prev, _running);
+-    }
++    _threads_amount--;
+ 
++    dispatch(prev, _running);
++
+     unlock();
+ }
+ 
+@@ -227,9 +208,6 @@
+     // lock() must be called before entering this method
+     assert(locked());
+ 
+-    while(_ready.empty())
+-        idle();
+-
+     Thread * prev = running();
+     prev->_state = WAITING;
+     prev->_waiting = q;
+@@ -315,17 +293,34 @@
+     unlock();
+ }
+ 
+-
+ int Thread::idle()
+ {
+-    db<Thread>(TRC) << "Thread::idle()" << endl;
+ 
+-    db<Thread>(INF) << "There are no runnable threads at the moment!" << endl;
+-    db<Thread>(INF) << "Halting the CPU ..." << endl;
++    lock();
+ 
+-    CPU::int_enable();
+-    CPU::halt();
++    while (_threads_amount > 1)
++    {
+ 
++        if (_ready.empty()) {
++            unlock();
++            CPU::halt();
++        } else {
++            yield();
++        }
++        
++        lock();
++    }
++
++    db<Thread>(WRN) << "The last thread in the system has exited!\n";
++    
++    if(reboot) {
++        db<Thread>(WRN) << "Rebooting the machine ...\n";
++        Machine::reboot();
++    } else {
++        db<Thread>(WRN) << "Halting the CPU ...\n";
++        CPU::halt();
++    }
++
+     return 0;
+ }
+ 
+Index: src/init/init_first.cc
+===================================================================
+--- src/init/init_first.cc	(revision 5035)
++++ src/init/init_first.cc	(working copy)
+@@ -29,6 +29,9 @@
+         // which will directly call main(). In this case, _init will have already been called,
+         // before Init_Application, to construct main()'s global objects.
+         Thread::_running = new (kmalloc(sizeof(Thread))) Thread(Thread::Configuration(Thread::RUNNING, Thread::NORMAL), reinterpret_cast<int (*)()>(__epos_app_entry));
++        
++        Thread * _idle = new (kmalloc(sizeof(Thread))) Thread(Thread::Configuration(Thread::READY, Thread::VERYLOW), &Thread::idle);
++        ((void)_idle);
+ 
+         db<Init>(INF) << "done!" << endl;
+ 

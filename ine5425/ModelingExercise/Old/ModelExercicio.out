@@ -1,0 +1,98 @@
+Controlador de execução do SIMAN.
+
+10.4204 Segundos>
+                                      ARENA Simulation Results
+                                    fabiola - License: 1234567890
+
+                                  Sumário para Replicação 1 de 1
+
+Projeto: Unnamed Project                                             Data da execução :11/13/2018
+Analista: Bruno                                                       Data de revisão do modelo:11/13/2018
+
+Replicação terminada no tempo de      : 10.4204 Segundos 
+Unidade de Tempo Base: Segundos
+
+                                           VARIÁVEIS DE REGISTRO
+
+Identificador                                  Média   Meia Largura  Mínimo    Máximo   Observações
+___________________________________________________________________________________________________
+
+Token.VATime                                    --         --         --         --          0
+Token.NVATime                                   --         --         --         --          0
+Token.WaitTime                                  --         --         --         --          0
+Token.TranTime                                  --         --         --         --          0
+Token.OtherTime                                 --         --         --         --          0
+Token.TotalTime                                 --         --         --         --          0
+Mensagem.VATime                             .00000     (Insuf)    .00000     .00000          1    
+Mensagem.NVATime                            .00000     (Insuf)    .00000     .00000          1    
+Mensagem.WaitTime                           .00256     (Insuf)    .00256     .00256          1    
+Mensagem.TranTime                           .00000     (Insuf)    .00000     .00000          1    
+Mensagem.OtherTime                          10.397     (Insuf)    10.397     10.397          1    
+Mensagem.TotalTime                          10.399     (Insuf)    10.399     10.399          1    
+Constroi pacote.Queue.WaitingTime           .00128     (Insuf)    .00000     .00256          2    
+Aloca computador.Queue.WaitingTime          .00000     (Insuf)    .00000     .00000          1    
+
+                                     VARIÁVEIS DISCRETAS
+
+Identificador                                 Média   Meia Largura  Mínimo    Máximo   Valor Final
+___________________________________________________________________________________________________
+
+Token.WIP                                   1.0000     (Insuf)    .00000     1.0000     1.0000    
+Mensagem.WIP                                1.9958     (Insuf)    .00000     2.0000     .00000    
+Computador8.NumberBusy                      .00000     (Insuf)    .00000     .00000     .00000    
+Computador8.NumberScheduled                 1.0000     (Insuf)    1.0000     1.0000     1.0000    
+Computador8.Utilization                     .00000     (Insuf)    .00000     .00000     .00000    
+Computador2.NumberBusy                      .00000     (Insuf)    .00000     .00000     .00000    
+Computador2.NumberScheduled                 1.0000     (Insuf)    1.0000     1.0000     1.0000    
+Computador2.Utilization                     .00000     (Insuf)    .00000     .00000     .00000    
+Computador3.NumberBusy                      .99803     (Insuf)    .00000     1.0000     .00000    
+Computador3.NumberScheduled                 1.0000     (Insuf)    1.0000     1.0000     1.0000    
+Computador3.Utilization                     .99803     (Insuf)    .00000     1.0000     .00000    
+Computador1.NumberBusy                      .00000     (Insuf)    .00000     .00000     .00000    
+Computador1.NumberScheduled                 1.0000     (Insuf)    1.0000     1.0000     1.0000    
+Computador1.Utilization                     .00000     (Insuf)    .00000     .00000     .00000    
+Computador6.NumberBusy                      .00000     (Insuf)    .00000     .00000     .00000    
+Computador6.NumberScheduled                 1.0000     (Insuf)    1.0000     1.0000     1.0000    
+Computador6.Utilization                     .00000     (Insuf)    .00000     .00000     .00000    
+Computador7.NumberBusy                      .00000     (Insuf)    .00000     .00000     .00000    
+Computador7.NumberScheduled                 1.0000     (Insuf)    1.0000     1.0000     1.0000    
+Computador7.Utilization                     .00000     (Insuf)    .00000     .00000     .00000    
+Computador4.NumberBusy                      .00000     (Insuf)    .00000     .00000     .00000    
+Computador4.NumberScheduled                 1.0000     (Insuf)    1.0000     1.0000     1.0000    
+Computador4.Utilization                     .00000     (Insuf)    .00000     .00000     .00000    
+Computador5.NumberBusy                      .00000     (Insuf)    .00000     .00000     .00000    
+Computador5.NumberScheduled                 1.0000     (Insuf)    1.0000     1.0000     1.0000    
+Computador5.Utilization                     .00000     (Insuf)    .00000     .00000     .00000    
+Constroi pacote.Queue.NumberInQueue         2.4567E-04 (Insuf)    .00000     2.0000     .00000    
+Aloca computador.Queue.NumberInQueue        .00000     (Insuf)    .00000     .00000     .00000    
+
+                                             RESULTADOS
+
+Identificador                                   Valor
+_____________________________________________________________
+
+Token.NumberIn                              1.0000    
+Token.NumberOut                             .00000    
+Mensagem.NumberIn                           2.0000    
+Mensagem.NumberOut                          2.0000    
+Computador8.NumberSeized                    .00000    
+Computador8.ScheduledUtilization            .00000    
+Computador2.NumberSeized                    .00000    
+Computador2.ScheduledUtilization            .00000    
+Computador3.NumberSeized                    1.0000    
+Computador3.ScheduledUtilization            .99803    
+Computador1.NumberSeized                    .00000    
+Computador1.ScheduledUtilization            .00000    
+Computador6.NumberSeized                    .00000    
+Computador6.ScheduledUtilization            .00000    
+Computador7.NumberSeized                    .00000    
+Computador7.ScheduledUtilization            .00000    
+Computador4.NumberSeized                    .00000    
+Computador4.ScheduledUtilization            .00000    
+Computador5.NumberSeized                    .00000    
+Computador5.ScheduledUtilization            .00000    
+System.NumberOut                            1.0000    
+
+
+Tempo executando a simulação: 1.12 minutos.
+Simulação completada.

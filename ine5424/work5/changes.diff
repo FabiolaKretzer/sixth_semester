@@ -1,0 +1,74 @@
+Index: include/thread.h
+===================================================================
+--- include/thread.h	(revision 5047)
++++ include/thread.h	(working copy)
+@@ -115,6 +115,7 @@
+     volatile State _state;
+     Queue * _waiting;
+     Thread * volatile _joining;
++    Thread * volatile _waiting_join;
+     Queue::Element _link;
+ 
+     static volatile unsigned int _thread_count;
+Index: src/abstraction/thread.cc
+===================================================================
+--- src/abstraction/thread.cc	(revision 5047)
++++ src/abstraction/thread.cc	(working copy)
+@@ -66,17 +66,36 @@
+                     << ",context={b=" << _context
+                     << "," << *_context << "})" << endl;
+ 
+-    if(_state != FINISHING)
++    assert(_state != RUNNING);
++
++    switch (_state)
++    {
++    case READY:
++        _ready.remove(this);
+         _thread_count--;
++        break;
+ 
+-    _ready.remove(this);
+-    _suspended.remove(this);
++    case SUSPENDED:
++        if (_waiting_join) //! Libera thread da responsabilidade de me acordar
++            _waiting_join->_joining = 0;
+ 
+-    if(_waiting)
++        _suspended.remove(this);
++        _thread_count--;
++        break;
++
++    case WAITING:
+         _waiting->remove(this);
++        _thread_count--;
++        break;
+ 
+-    if(_joining)
++    default: //! FINISHING
++        break;
++    }
++
++    if(_joining) {
++        _joining->_waiting_join = 0;
+         _joining->resume();
++    }
+ 
+     unlock();
+ 
+@@ -98,6 +117,7 @@
+ 
+     if(_state != FINISHING) {
+         _joining = running();
++        _joining->_waiting_join = this;
+         _joining->suspend();
+     } else
+         unlock();
+@@ -196,6 +216,7 @@
+     _thread_count--;
+ 
+     if(prev->_joining) {
++        prev->_joining->_waiting_join = 0;
+         prev->_joining->resume();
+         prev->_joining = 0;
+     }

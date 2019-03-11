@@ -1,0 +1,27 @@
+[RESOURCES]
+Computador8
+Computador2
+Computador3
+Computador1
+Computador6
+Computador7
+Computador4
+Computador5
+[VARIABLES]
+Verifica Origem Diferente Destino.NumberOut False
+Dono
+Verifica se a mensagem eh para mim.NumberOut True
+Cria Mensagens.NumberOut
+Verifica Origem Diferente Destino.NumberOut True
+Verifica tipo da entidade.NumberOut True
+Cria Token.NumberOut
+Destino
+Verifica se a mensagem eh para mim.NumberOut False
+Recebe resposta.NumberOut
+Constroi pacote.NumberOut
+Tamanho
+Separa o token da mensagem.NumberOut Orig
+Verifica se a resposta eh para mim.NumberOut True
+Verifica tipo da entidade.NumberOut False
+Origem
+Verifica se a resposta eh para mim.NumberOut False
