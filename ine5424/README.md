@@ -2,7 +2,7 @@
 
 Final work code in: https://github.com/joaovicentesouto/ContextDaemon
 
-<h5>Equipe: <\h5>
+<h5>Equipe: 
 
 - Bruno Bonotto
 - Fabíola Kretzer
